@@ -78,6 +78,16 @@ dsh plugin add dsh-tibo-reset-watch
 
 文字与链接归原作者所有。本插件只是一个本地阅读器：数据存在 `~/.dsh/tibo-reset-watch/`，除了抓数据源、可选的原帖查询和翻译请求之外不向别处发送任何内容。
 
+## 隐私与数据流向
+
+抓取和存储都留在本机，只有翻译这一处会外发。
+
+- Host 侧只发三种外部请求：你配置的 `sourceUrl`、展开原帖时的 `api.fxtwitter.com/status/<id>`、以及 Host 的翻译服务。
+- 翻译服务可能把文本转给公开翻译通道（Google 或 Bing），取决于你的 DSH 怎么配置。要完全不外发，配置里设 `"translate": false`，只保留原文。
+- 帖子内容和已读状态存在 `~/.dsh/tibo-reset-watch/` 与浏览器 `localStorage`。
+- 插件不读取凭据、API Key、工作区文件、会话历史或任何其他应用数据。
+- 它和其他 DSH 插件拥有同样的进程权限；读一遍 `index.js` 和 `client.js` 就能核实它到底做了什么。
+
 ## 文件
 
 | 路径 | 作用 |

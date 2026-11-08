@@ -78,6 +78,16 @@ The built-in preset reads **tiboreset.com**, a third-party public text mirror of
 
 Text and links belong to their authors. This plugin is a personal reader: it stores rows locally under `~/.dsh/tibo-reset-watch/` and sends nothing anywhere except the fetch of the source URL, the optional quote lookup and the translation request.
 
+## Privacy and data flow
+
+Fetched and stored data stays on your machine, with one exception: the text that gets translated.
+
+- The Host makes only these outbound requests: your configured `sourceUrl`, `api.fxtwitter.com/status/<id>` when you expand a reply, and the Host translation service.
+- Depending on how your DSH installation routes translation, post text may reach a public provider (Google or Bing). Set `"translate": false` in the config to fully disable translation and keep every post local.
+- Posts and read state live in `~/.dsh/tibo-reset-watch/` and the browser's `localStorage`.
+- The plugin never reads credentials, API keys, workspace files, session history or other application data.
+- It runs with the permissions of any DSH plugin; reading `index.js` and `client.js` is enough to verify what it does.
+
 ## Files
 
 | Path | Purpose |
