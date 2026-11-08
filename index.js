@@ -1,14 +1,14 @@
 /**
- * Host half of X Watch.
+ * Host half of Tibo Reset Watch.
  *
  *  - polls configured X/Twitter sources on a timer (no LLM, no agent turn)
  *  - fetches the post a reply answers (fxtwitter, keyless) so the card can show it
  *  - translates text through the Host translation service when one is available
- *  - publishes everything on GET /x-watch/feed for the Client overlay
+ *  - publishes everything on GET /tibo-reset-watch/feed for the Client overlay
  *
  * Sources are pluggable. Out of the box one `tiboreset` preset is enabled
  * (a public text mirror of @thsottiaux's timeline); any number of plain JSON
- * endpoints can be added in ~/.dsh/x-watch/config.json.
+ * endpoints can be added in ~/.dsh/tibo-reset-watch/config.json.
  */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { homedir } from 'node:os'
@@ -16,10 +16,10 @@ import { join } from 'node:path'
 
 export const inject = ['webServer']
 
-const STATE_DIR = join(homedir(), '.dsh', 'x-watch')
+const STATE_DIR = join(homedir(), '.dsh', 'tibo-reset-watch')
 const STATE_FILE = join(STATE_DIR, 'state.json')
 const CONFIG_FILE = join(STATE_DIR, 'config.json')
-const FEED_PATH = '/x-watch/feed'
+const FEED_PATH = '/tibo-reset-watch/feed'
 const USER_AGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36'
 const FX_API = 'https://api.fxtwitter.com/status/'
@@ -280,13 +280,13 @@ export function apply(ctx) {
       config = { ...DEFAULT_CONFIG, ...parsed }
       if (!Array.isArray(config.accounts) || config.accounts.length === 0) config.accounts = DEFAULT_CONFIG.accounts
     } catch (error) {
-      if (error?.code !== 'ENOENT') ctx.logger?.warn?.('x-watch: config unreadable, using defaults: %s', error)
+      if (error?.code !== 'ENOENT') ctx.logger?.warn?.('tibo-reset-watch: config unreadable, using defaults: %s', error)
       config = { ...DEFAULT_CONFIG }
       try {
         await mkdir(STATE_DIR, { recursive: true })
         await writeFile(CONFIG_FILE, JSON.stringify(DEFAULT_CONFIG, null, 2), 'utf8')
       } catch (writeError) {
-        ctx.logger?.warn?.('x-watch: config write failed: %s', writeError)
+        ctx.logger?.warn?.('tibo-reset-watch: config write failed: %s', writeError)
       }
     }
   }
@@ -300,7 +300,7 @@ export function apply(ctx) {
         'utf8',
       )
     } catch (error) {
-      ctx.logger?.warn?.('x-watch: persist failed: %o', error)
+      ctx.logger?.warn?.('tibo-reset-watch: persist failed: %o', error)
     }
   }
 
@@ -312,7 +312,7 @@ export function apply(ctx) {
       if (saved?.cursors && typeof saved.cursors === 'object') state.cursors = saved.cursors
       if (typeof saved?.updatedAt === 'string') state.updatedAt = saved.updatedAt
     } catch (error) {
-      if (error?.code !== 'ENOENT') ctx.logger?.warn?.('x-watch: restore failed: %o', error)
+      if (error?.code !== 'ENOENT') ctx.logger?.warn?.('tibo-reset-watch: restore failed: %o', error)
     }
   }
 
@@ -322,7 +322,7 @@ export function apply(ctx) {
     const translator = typeof ctx.get === 'function' ? ctx.get('translator') : undefined
     if (!translator || typeof translator.resolve !== 'function' || typeof translator.translate !== 'function') {
       translatorUnavailable = true
-      ctx.logger?.info?.('x-watch: no Host translation service, showing the original text')
+      ctx.logger?.info?.('tibo-reset-watch: no Host translation service, showing the original text')
       return null
     }
     const clipped = String(text).slice(0, 2000)
@@ -338,7 +338,7 @@ export function apply(ctx) {
         return null
       } catch (error) {
         if (attempt === 1) {
-          ctx.logger?.warn?.('x-watch: translate failed: %s', error?.message || error)
+          ctx.logger?.warn?.('tibo-reset-watch: translate failed: %s', error?.message || error)
           return null
         }
       }
@@ -436,7 +436,7 @@ export function apply(ctx) {
         await persist()
       } catch (error) {
         state.lastError = String(error?.message || error)
-        ctx.logger?.warn?.('x-watch: poll failed: %s', state.lastError)
+        ctx.logger?.warn?.('tibo-reset-watch: poll failed: %s', state.lastError)
       } finally {
         state.lastPollAt = new Date().toISOString()
         loading = null
@@ -445,7 +445,7 @@ export function apply(ctx) {
     return loading
   }
 
-  ctx.logger?.info?.('x-watch: applying, webServer=%s', typeof ctx.webServer?.register === 'function' ? 'yes' : 'no')
+  ctx.logger?.info?.('tibo-reset-watch: applying, webServer=%s', typeof ctx.webServer?.register === 'function' ? 'yes' : 'no')
 
   ctx.effect(
     () => {
@@ -463,14 +463,14 @@ export function apply(ctx) {
             })
             response.end(body)
           } catch (error) {
-            ctx.logger?.warn?.('x-watch: feed failed: %s', error?.stack || error)
+            ctx.logger?.warn?.('tibo-reset-watch: feed failed: %s', error?.stack || error)
             response.writeHead(500, { 'content-type': 'application/json; charset=utf-8' })
             response.end(JSON.stringify({ error: String(error?.message || error) }))
           }
         },
       })
     },
-    'x-watch-feed-route',
+    'tibo-reset-watch-feed-route',
   )
 
   ctx.effect(() => {
@@ -493,5 +493,5 @@ export function apply(ctx) {
       disposed = true
       if (timer) clearInterval(timer)
     }
-  }, 'x-watch-poller')
+  }, 'tibo-reset-watch-poller')
 }

@@ -1,10 +1,10 @@
 {
-  "name": "dsh-x-watch",
+  "name": "dsh-tibo-reset-watch",
   "version": "0.1.0",
-  "description": "X Watch: a corner card that shows new posts and replies from X accounts in Chinese. It ships with a Tibo (@thsottiaux) reset-watch preset and accepts any JSON source.",
+  "description": "Tibo Reset Watch: a corner card that watches Tibo (@thsottiaux) on X, shows new posts and replies in Chinese, marks reset posts, and accepts any JSON source.",
   "type": "module",
   "license": "MIT",
-  "author": "OWNER",
+  "author": "593682963wd-wq",
   "keywords": [
     "dsh-plugin",
     "deepseek-harness",
@@ -14,13 +14,13 @@
     "widget",
     "notify"
   ],
-  "homepage": "https://github.com/OWNER/dsh-x-watch#readme",
+  "homepage": "https://github.com/593682963wd-wq/dsh-tibo-reset-watch#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/dsh-x-watch.git"
+    "url": "git+https://github.com/593682963wd-wq/dsh-tibo-reset-watch.git"
   },
   "bugs": {
-    "url": "https://github.com/OWNER/dsh-x-watch/issues"
+    "url": "https://github.com/593682963wd-wq/dsh-tibo-reset-watch/issues"
   },
   "engines": {
     "dsh": ">=0.2.1-rc.3"

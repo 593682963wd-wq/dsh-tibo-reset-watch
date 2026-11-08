@@ -1,4 +1,4 @@
-# dsh-x-watch
+# dsh-tibo-reset-watch
 
 A corner card inside DeepSeek Harness that shows what a watched X account just said — translated into Chinese.
 
@@ -9,7 +9,7 @@ Ships with a **Tibo preset** (`@thsottiaux`): the Codex usage-limit rescues usua
 ## Install
 
 ```sh
-dsh plugin add dsh-x-watch
+dsh plugin add dsh-tibo-reset-watch
 ```
 
 Restart DeepSeek Harness if the badge does not appear within a minute.
@@ -24,7 +24,7 @@ Restart DeepSeek Harness if the badge does not appear within a minute.
 
 ## Configuration
 
-The first run writes `~/.dsh/x-watch/config.json`:
+The first run writes `~/.dsh/tibo-reset-watch/config.json`:
 
 ```json
 {
@@ -76,13 +76,13 @@ The built-in preset reads **tiboreset.com**, a third-party public text mirror of
 - it exposes text only — images, videos and reposts are not shown;
 - it can change or go away at any time; when it does, the card shows `OFFLINE` and the original rows stay readable.
 
-Text and links belong to their authors. This plugin is a personal reader: it stores rows locally under `~/.dsh/x-watch/` and sends nothing anywhere except the fetch of the source URL, the optional quote lookup and the translation request.
+Text and links belong to their authors. This plugin is a personal reader: it stores rows locally under `~/.dsh/tibo-reset-watch/` and sends nothing anywhere except the fetch of the source URL, the optional quote lookup and the translation request.
 
 ## Files
 
 | Path | Purpose |
 | --- | --- |
-| `index.js` | Host half: polling, parsing, translation, `/x-watch/feed` route, state under `~/.dsh/x-watch/` |
+| `index.js` | Host half: polling, parsing, translation, `/tibo-reset-watch/feed` route, state under `~/.dsh/tibo-reset-watch/` |
 | `client.js` | Client half: the card, the badge and read state in `localStorage` |
 | `cordis.patch.yml` | Bundle patch that inserts the plugin |
 | `locale/*.json` | Plugin title and description |

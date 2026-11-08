@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "X Watch",
-    "description": "右上角卡片：关注的 X 账号有新帖或回复时弹出中文译文，没点开就收成一个角标。内置 Tibo（@thsottiaux）预设，也支持任意 JSON 数据源。"
+    "title": "Tibo 重置监控",
+    "description": "右上角卡片：Tibo（@thsottiaux）在 X 上新帖或回复时弹出中文译文，额度重置类消息加 RESET 标。也支持追加任意 JSON 数据源。"
   }
 }

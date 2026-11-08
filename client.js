@@ -1,18 +1,18 @@
 /**
- * Client half of X Watch.
+ * Client half of Tibo Reset Watch.
  *
  * Top-right HUD: a round badge on the window edge when idle, a glass card when
  * there is news. Every row shows what the account said; clicking a row reveals
  * the post it replied to. Hovering or clicking a row marks it read.
  */
 window.__ModuleLoader__.load({
-  id: 'dsh-x-watch',
+  id: 'dsh-tibo-reset-watch',
   factory(require) {
     const React = require('react');
     const h = React.createElement;
 
-    const FEED_URL = '/x-watch/feed';
-    const READ_KEY = 'dsh-x-watch-read-ids';
+    const FEED_URL = '/tibo-reset-watch/feed';
+    const READ_KEY = 'dsh-tibo-reset-watch-read-ids';
     const VISIBLE_ITEMS = 8;
     const AUTO_COLLAPSE_MS = 16000;
     const CLIENT_POLL_MS = 25000;
@@ -258,14 +258,14 @@ window.__ModuleLoader__.load({
       if (!feed && failed) return null;
 
       const cardTop = feed && feed.meta && Number(feed.meta.cardTop) ? Number(feed.meta.cardTop) : 74;
-      const title = (feed && feed.meta && feed.meta.title) || 'X WATCH';
+      const title = (feed && feed.meta && feed.meta.title) || 'Tibo 重置监控';
       const pollLabel = feed && feed.intervalMs ? Math.max(1, Math.round(feed.intervalMs / 60000)) + 'M' : '3M';
 
       const count = unread.length;
       const syncText = feed && feed.updatedAt ? clockOf(feed.updatedAt) : failed ? 'OFFLINE' : 'SYNC';
 
       if (!open) {
-        const label = count > 0 ? 'X Watch · ' + count + ' 条新动态' : 'X Watch';
+        const label = count > 0 ? 'Tibo 重置监控 · ' + count + ' 条新动态' : 'Tibo 重置监控';
         return h(
           React.Fragment,
           null,
@@ -311,7 +311,7 @@ window.__ModuleLoader__.load({
             {
               className: 'tw-card',
               role: 'dialog',
-              'aria-label': 'X Watch 动态',
+              'aria-label': 'Tibo 重置监控 动态',
               onMouseEnter: function () {
                 hoverRef.current = true;
                 if (collapseRef.current) {
@@ -460,7 +460,7 @@ window.__ModuleLoader__.load({
           return ctx.slots.register(
             {
               name: 'shell.overlay',
-              id: 'x-watch',
+              id: 'tibo-reset-watch',
               order: 200,
             },
             TiboWidget,

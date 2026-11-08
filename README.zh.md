@@ -1,4 +1,4 @@
-# dsh-x-watch
+# dsh-tibo-reset-watch
 
 DeepSeek Harness 右上角的账号动态卡片：关注的 X 账号一有新帖或回复就弹出，配中文译文。
 
@@ -9,7 +9,7 @@ DeepSeek Harness 右上角的账号动态卡片：关注的 X 账号一有新帖
 ## 安装
 
 ```sh
-dsh plugin add dsh-x-watch
+dsh plugin add dsh-tibo-reset-watch
 ```
 
 一分钟内没看到角标就重启一次 DeepSeek Harness。
@@ -24,7 +24,7 @@ dsh plugin add dsh-x-watch
 
 ## 配置
 
-首次运行会生成 `~/.dsh/x-watch/config.json`：
+首次运行会生成 `~/.dsh/tibo-reset-watch/config.json`：
 
 ```json
 {
@@ -76,13 +76,13 @@ dsh plugin add dsh-x-watch
 - 只有文字，图片、视频、转推不显示；
 - 随时可能改版或消失。真挂了卡片会显示 `OFFLINE`，已经抓到的内容仍可阅读。
 
-文字与链接归原作者所有。本插件只是一个本地阅读器：数据存在 `~/.dsh/x-watch/`，除了抓数据源、可选的原帖查询和翻译请求之外不向别处发送任何内容。
+文字与链接归原作者所有。本插件只是一个本地阅读器：数据存在 `~/.dsh/tibo-reset-watch/`，除了抓数据源、可选的原帖查询和翻译请求之外不向别处发送任何内容。
 
 ## 文件
 
 | 路径 | 作用 |
 | --- | --- |
-| `index.js` | Host：轮询、解析、翻译、`/x-watch/feed` 路由、状态存 `~/.dsh/x-watch/` |
+| `index.js` | Host：轮询、解析、翻译、`/tibo-reset-watch/feed` 路由、状态存 `~/.dsh/tibo-reset-watch/` |
 | `client.js` | Client：卡片、角标、`localStorage` 里的已读状态 |
 | `cordis.patch.yml` | 插入插件的 bundle patch |
 | `locale/*.json` | 插件标题与描述 |
