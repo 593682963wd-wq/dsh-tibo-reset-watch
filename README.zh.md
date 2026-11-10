@@ -9,7 +9,7 @@ DeepSeek Harness 右上角的账号动态卡片：关注的 X 账号一有新帖
 ## 安装
 
 ```sh
-dsh plugin add dsh-tibo-reset-watch
+dsh plugin add github:593682963wd-wq/dsh-tibo-reset-watch
 ```
 
 一分钟内没看到角标就重启一次 DeepSeek Harness。

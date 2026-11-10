@@ -9,7 +9,7 @@ Ships with a **Tibo preset** (`@thsottiaux`): the Codex usage-limit rescues usua
 ## Install
 
 ```sh
-dsh plugin add dsh-tibo-reset-watch
+dsh plugin add github:593682963wd-wq/dsh-tibo-reset-watch
 ```
 
 Restart DeepSeek Harness if the badge does not appear within a minute.
