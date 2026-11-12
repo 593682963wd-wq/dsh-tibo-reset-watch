@@ -12,6 +12,8 @@ Ships with a **Tibo preset** (`@thsottiaux`): the Codex usage-limit rescues usua
 dsh plugin add github:593682963wd-wq/dsh-tibo-reset-watch
 ```
 
+This package is not published to npm yet, so install it from GitHub. The first run asks for build-script approval — follow the hint `dsh` prints and retry; pin a commit with `github:owner/repo#sha` if you want a frozen copy.
+
 Restart DeepSeek Harness if the badge does not appear within a minute.
 
 ## What it does
