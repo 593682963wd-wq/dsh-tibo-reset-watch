@@ -12,6 +12,8 @@ DeepSeek Harness 右上角的账号动态卡片：关注的 X 账号一有新帖
 dsh plugin add github:593682963wd-wq/dsh-tibo-reset-watch
 ```
 
+这个包还没发布到 npm，所以从 GitHub 装。首次安装会要求放行构建脚本，按 `dsh` 给出的提示处理后重试即可；想锁定版本可以写成 `github:owner/repo#sha`。
+
 一分钟内没看到角标就重启一次 DeepSeek Harness。
 
 ## 它做什么
